@@ -18,10 +18,13 @@ class Guide
     introduction
     #interactive loop to perform actions until user wants exits
     result = nil
+    actions = ['find', 'add', 'sort', 'quit']
     until result == :quit do
       puts "Please Select What you want (find, add, sort, quit):"
       print "> "
       user_response = gets.chomp
+      processed_response = user_response.downcase.strip
+      next unless actions.include?(processed_response)
       result = do_action(user_response)
     end
     #conclusion
