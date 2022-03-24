@@ -17,8 +17,30 @@ class Guide
     #introduction
     introduction
     #interactive loop to perform actions until user wants exits
+    result = nil
+    until result == :quit do
+      puts "Please Select What you want (find, add, sort, quit):"
+      print "> "
+      user_response = gets.chomp
+      result = do_action(user_response)
+    end
     #conclusion
     conclusion
+  end
+
+  def do_action(response)
+    case response.downcase
+    when 'find'
+      puts "Finding Restaurent"
+    when 'add'
+      puts "Adding Restaurants"
+    when 'sort'
+      puts "Sorting Restaurents"
+    when 'quit'
+      return :quit
+    else
+      puts "We're not able to process, Please Try Again>>"
+    end
   end
 
   def introduction
