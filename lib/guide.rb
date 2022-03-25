@@ -38,7 +38,10 @@ class Guide
     when 'add'
       add_restaurant
     when 'find'
-      puts "Finding Restaurent"
+      puts "Enter Search word-"
+      print "> "
+      search_term = gets.chomp.strip
+      find_restaurant search_term
     when 'quit'
       return :quit
     else
@@ -74,6 +77,17 @@ class Guide
     @restaurants = Restaurant.new.all
     @restaurants.each do |restaurant|
       puts "#{restaurant.name}\t#{restaurant.cuisine}\t$#{restaurant.price}"
+    end
+  end
+
+  def find_restaurant search
+    @restaurants = Restaurant.new.find search
+    if @restaurants.empty?
+      puts "It Seems There Is No Restaurants with your search!! TRY AGAIN"
+    else
+      @restaurants.each do |restaurant|
+        puts "#{restaurant.name}\t#{restaurant.cuisine}\t$#{restaurant.price}"
+      end
     end
   end
 

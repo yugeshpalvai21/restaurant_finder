@@ -42,4 +42,19 @@ class Restaurant
     end
     restaurant_list
   end
+
+  def find term
+    restaurant_list = []
+    File.readlines(Restaurant.file_path).each do |line|
+      if line =~ /#{term}/
+        name, cuisine, price = line.chomp.split("\t")
+        restaurant = Restaurant.new
+        restaurant.name = name
+        restaurant.cuisine = cuisine
+        restaurant.price = price
+        restaurant_list << restaurant
+      end
+    end
+    restaurant_list
+  end
 end
