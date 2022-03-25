@@ -36,7 +36,7 @@ class Guide
     when 'find'
       puts "Finding Restaurent"
     when 'add'
-      puts "Adding Restaurants"
+      add_restaurant
     when 'sort'
       puts "Sorting Restaurents"
     when 'quit'
@@ -49,6 +49,24 @@ class Guide
   def introduction
     puts "\n\t### HELLO!!! Welcome To The Restaurent Finder App ###"
     puts "\n\t>>> This is Interactive App helps you to find best food in restaurents <<<"
+  end
+
+  def add_restaurant
+    restaurant = Restaurant.new
+    puts "Please Enter Restaurant Name --"
+    print "> "
+    restaurant.name = gets.chomp.strip
+    puts "Please Enter Cuisine Type --"
+    print "> "
+    restaurant.cuisine = gets.chomp.strip
+    puts "Please Enter Price --"
+    print "> "
+    restaurant.price = gets.chomp.strip
+    if restaurant.save
+      puts "Restaurant Saved!!!"
+    else
+      puts "Something Went Wrong, Please Try Again"
+    end
   end
 
   def conclusion
