@@ -18,9 +18,9 @@ class Guide
     introduction
     #interactive loop to perform actions until user wants exits
     result = nil
-    actions = ['find', 'add', 'sort', 'quit']
+    actions = ['list', 'add', 'find', 'quit']
     until result == :quit do
-      puts "Please Select What you want (find, add, sort, quit):"
+      puts "Please Select What you want (list, add, find, quit):"
       print "> "
       user_response = gets.chomp
       processed_response = user_response.downcase.strip
@@ -33,12 +33,12 @@ class Guide
 
   def do_action(response)
     case response.downcase
-    when 'find'
-      puts "Finding Restaurent"
+    when 'list'
+      list_restaurants
     when 'add'
       add_restaurant
-    when 'sort'
-      sort_restaurants
+    when 'find'
+      puts "Finding Restaurent"
     when 'quit'
       return :quit
     else
@@ -69,7 +69,7 @@ class Guide
     end
   end
 
-  def sort_restaurants
+  def list_restaurants
     puts "\t ### List Of Restaurants ###"
     @restaurants = Restaurant.new.all
     @restaurants.each do |restaurant|
