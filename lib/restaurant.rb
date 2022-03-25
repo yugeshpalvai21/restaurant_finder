@@ -29,4 +29,17 @@ class Restaurant
     end
     return true
   end
+
+  def all
+    restaurant_list = []
+    File.readlines(Restaurant.file_path).each do |line|
+      name, cuisine, price = line.chomp.split("\t")
+      restaurant = Restaurant.new
+      restaurant.name = name
+      restaurant.cuisine = cuisine
+      restaurant.price = price
+      restaurant_list << restaurant
+    end
+    restaurant_list
+  end
 end

@@ -38,7 +38,7 @@ class Guide
     when 'add'
       add_restaurant
     when 'sort'
-      puts "Sorting Restaurents"
+      sort_restaurants
     when 'quit'
       return :quit
     else
@@ -66,6 +66,14 @@ class Guide
       puts "Restaurant Saved!!!"
     else
       puts "Something Went Wrong, Please Try Again"
+    end
+  end
+
+  def sort_restaurants
+    puts "\t ### List Of Restaurants ###"
+    @restaurants = Restaurant.new.all
+    @restaurants.each do |restaurant|
+      puts "#{restaurant.name}\t#{restaurant.cuisine}\t$#{restaurant.price}"
     end
   end
 
