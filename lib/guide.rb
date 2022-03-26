@@ -22,19 +22,25 @@ class Guide
     until result == :quit do
       puts "Please Select What you want (list, add, find, quit):"
       print "> "
-      user_response = gets.chomp
-      processed_response = user_response.downcase.strip
-      next unless actions.include?(processed_response)
-      result = do_action(user_response)
+      action, args = get_action
+      next unless actions.include?(action)
+      result = do_action(action, args)
     end
     #conclusion
     conclusion
   end
 
-  def do_action(response)
-    case response.downcase
+  def get_action
+    user_response = gets.chomp.strip.split(" ")
+    action = user_response.shift
+    args = user_response
+    return [action, args]
+  end
+
+  def do_action(action, args=[])
+    case action.downcase
     when 'list'
-      list_restaurants
+      list_restaurants(args)
     when 'add'
       add_restaurant
     when 'find'
@@ -72,9 +78,24 @@ class Guide
     end
   end
 
-  def list_restaurants
+  def list_restaurants args
     puts "\t ### List Of Restaurants ###"
     @restaurants = Restaurant.new.all
+    sort_order = args.shift || 'name'
+
+    @restaurants.sort! do |r1, r2|
+      case sort_order.downcase
+      when 'cuisine'
+        r1.cuisine <=> r2.cuisine
+      when 'price'
+        r1.price.to_i <=> r2.price.to_i
+      else
+        r1.name <=> r2.name
+      end 
+    end
+
+    puts "Listing Restaurants In The Order Of - #{sort_order.upcase}"
+
     @restaurants.each do |restaurant|
       puts "#{restaurant.name}\t#{restaurant.cuisine}\t$#{restaurant.price}"
     end
