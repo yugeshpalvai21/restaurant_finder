@@ -81,10 +81,14 @@ class Guide
   def list_restaurants args
     puts "\t ### List Of Restaurants ###"
     @restaurants = Restaurant.new.all
-    sort_order = args.shift || 'name'
+    sort_order = args.shift
+    if sort_order == 'by'
+      sort_order = args.shift
+    end
+    sort_order ||= 'name'
 
     @restaurants.sort! do |r1, r2|
-      case sort_order.downcase
+      case sort_order
       when 'cuisine'
         r1.cuisine <=> r2.cuisine
       when 'price'
