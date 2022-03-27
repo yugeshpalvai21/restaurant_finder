@@ -1,4 +1,5 @@
 require_relative './restaurant'
+require_relative './actions'
 
 class Guide
   def initialize(file_path)
@@ -21,7 +22,7 @@ class Guide
     actions = ['list', 'add', 'find', 'quit']
     until result == :quit do
       action, args = get_action
-      next unless actions.include?(action)
+      next unless listed_actions(action)
       result = do_action(action, args)
     end
     #conclusion
@@ -35,6 +36,10 @@ class Guide
     action = user_response.shift
     args = user_response
     return [action, args]
+  end
+
+  def listed_actions action
+    Actions::Names.include?(action)
   end
 
   def do_action(action, args=[])
