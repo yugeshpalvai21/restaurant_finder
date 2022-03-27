@@ -1,2 +1,3 @@
 Yugesh	Indian	30
 Sachin	Italian	400
+Topeca	Mexican	245

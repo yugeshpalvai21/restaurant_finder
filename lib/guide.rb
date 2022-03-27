@@ -39,7 +39,7 @@ class Guide
   end
 
   def listed_actions action
-    Actions::Names.include?(action)
+    Actions::LIST.include?(action)
   end
 
   def do_action(action, args=[])
