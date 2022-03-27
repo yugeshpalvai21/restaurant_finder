@@ -20,8 +20,6 @@ class Guide
     result = nil
     actions = ['list', 'add', 'find', 'quit']
     until result == :quit do
-      puts "Please Select What you want (list, add, find, quit):"
-      print "> "
       action, args = get_action
       next unless actions.include?(action)
       result = do_action(action, args)
@@ -31,6 +29,8 @@ class Guide
   end
 
   def get_action
+    puts "Please Select What you want (list, add, find, quit):"
+    print "> "
     user_response = gets.chomp.strip.split(" ")
     action = user_response.shift
     args = user_response
