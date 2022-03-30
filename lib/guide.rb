@@ -15,17 +15,14 @@ class Guide
   end
 
   def launch!
-    #introduction
     introduction
     #interactive loop to perform actions until user wants exits
     result = nil
-    actions = ['list', 'add', 'find', 'quit']
     until result == :quit do
       action, args = get_action
       next unless listed_actions(action)
       result = do_action(action, args)
     end
-    #conclusion
     conclusion
   end
 
