@@ -10,7 +10,7 @@ class Restaurant
   end
 
   def self.file_exists?
-    return true if file_path && File.exists?(file_path)
+    return true if file_path && File.exist?(file_path)
   end
 
   def self.create_file
